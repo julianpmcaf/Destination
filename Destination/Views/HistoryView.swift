@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HistoryView: View {
+    @StateObject var viewModel = ArticleViewModel()
     var body: some View {
         VStack(spacing: 0){
             HeaderView(name: "History", greeting: "", showGreeting: false, center: true)
@@ -19,8 +20,9 @@ struct HistoryView: View {
                     Text("Today")
                         .fontWeight(.semibold)
                         .padding(.top, 40)
-                    Article(icon: "airplane", title: "Your booking has been successful", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi at commodo ipsum. Ut rhoncus nunc at leo porta, ut vehicula nisi aliquam.", date: "20 June 2023", time: "8:30 PM")
-                    Article(icon: "hand.raised", title: "Your booking has been successful", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi at commodo ipsum. Ut rhoncus nunc at leo porta, ut vehicula nisi aliquam.", date: "20 June 2023",  time: "8:30 PM")
+                    ForEach(viewModel.articles, id: \.self){ article in
+                        ArticleView(icon: article.icon, title: article.title, description: article.description, date: "20 June 2023", time: "8:30 PM")
+                    }
                     Text("Yesterday")
                         .fontWeight(.semibold)
                         .padding(.top, 40)
@@ -29,10 +31,13 @@ struct HistoryView: View {
                 .padding(.horizontal)
                 .background(Color.white)
             }
-        }  
+            .onAppear{
+                viewModel.fetchArticle()
+            }
+        }
     }
 }
-struct Article: View{
+struct ArticleView: View{
     let icon: String
     let title: String
     let description: String

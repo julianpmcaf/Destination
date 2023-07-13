@@ -18,7 +18,7 @@ struct SettingsView: View {
                 VStack{
                     HeaderView(name: "Profile", greeting: "", showGreeting: false, center: true)
                     ProfileView()
-                        .padding(.bottom, 150)
+                        .padding(.bottom, 350)
                     
                         .padding(.vertical)
                     Spacer()

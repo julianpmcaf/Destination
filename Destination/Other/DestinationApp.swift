@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct DestinationApp: App {
+
+
     var body: some Scene {
         WindowGroup {
             WelcomeView()
+          
         }
     }
 }
